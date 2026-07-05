@@ -24,6 +24,13 @@ import { asset } from "@/lib/asset";
  * smoke both spreads and evolves. Reduced motion: static poster, no theatre.
  */
 
+/** Steel-blue ink footage: Pexels #7565814 (MART PRODUCTION, Pexels license,
+    free commercial). Re-encoded g=4 all-dense keyframes for smooth scrubbing. */
+const FOOTAGE = {
+  src: "/content/video/ink-steel.mp4",
+  poster: "/content/video/ink-steel-poster.webp",
+};
+
 /** Mask origin — where the droplet lands (fractions of the viewport). */
 const IMPACT = { x: 0.62, y: 0.4 };
 /** Droplet fall timing (s). */
@@ -62,7 +69,7 @@ export function InkRevealHero() {
     return (
       <section ref={heroRef} className="relative min-h-svh overflow-hidden bg-navy-deep">
         <Image
-          src={asset("/content/video/ink-navy-poster.webp")}
+          src={asset(FOOTAGE.poster)}
           alt=""
           aria-hidden
           fill
@@ -92,7 +99,7 @@ export function InkRevealHero() {
 
         {/* the ink footage, unveiled through the expanding circle */}
         <motion.div style={{ clipPath }} className="absolute inset-0 will-change-[clip-path]">
-          <HeroBackdrop progress={scrollYProgress} />
+          <HeroBackdrop progress={scrollYProgress} src={FOOTAGE.src} poster={FOOTAGE.poster} />
         </motion.div>
 
         {/* the droplet — a pale bead falling to the impact point */}

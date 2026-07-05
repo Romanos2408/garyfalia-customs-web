@@ -18,7 +18,16 @@ import { asset } from "@/lib/asset";
  * input, which is what keeps seek-scrubbing fluid). A dark scrim keeps the white
  * hero text legible. prefers-reduced-motion → a static poster, no scrubbing.
  */
-export function HeroBackdrop({ progress }: { progress: MotionValue<number> }) {
+export function HeroBackdrop({
+  progress,
+  src = "/content/video/ink-navy.mp4",
+  poster = "/content/video/ink-navy-poster.webp",
+}: {
+  progress: MotionValue<number>;
+  /** /public paths — passed through asset() internally. */
+  src?: string;
+  poster?: string;
+}) {
   const reduce = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
   const smooth = useSpring(progress, { stiffness: 90, damping: 26, mass: 0.35 });
@@ -48,7 +57,7 @@ export function HeroBackdrop({ progress }: { progress: MotionValue<number> }) {
     <div aria-hidden className="absolute inset-0 z-0 overflow-hidden bg-navy-deep">
       {reduce ? (
         <Image
-          src={asset("/content/video/ink-navy-poster.webp")}
+          src={asset(poster)}
           alt=""
           fill
           priority
@@ -63,9 +72,9 @@ export function HeroBackdrop({ progress }: { progress: MotionValue<number> }) {
           muted
           playsInline
           preload="auto"
-          poster={asset("/content/video/ink-navy-poster.webp")}
+          poster={asset(poster)}
         >
-          <source src={asset("/content/video/ink-navy.mp4")} type="video/mp4" />
+          <source src={asset(src)} type="video/mp4" />
         </video>
       )}
 
