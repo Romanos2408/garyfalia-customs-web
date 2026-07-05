@@ -2,11 +2,13 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { EASE, prefersReducedMotion } from "@/lib/motion";
 import { Container, Button, SectionHeading, Badge } from "@/components/ui";
 import { PieceFrame } from "@/components/gallery/PieceFrame";
 import { featuredGallery } from "@/data/gallery";
+import { asset } from "@/lib/asset";
 
 // a curated, deliberately uneven set
 const items = featuredGallery.slice(0, 5);
@@ -76,8 +78,24 @@ export function FeaturedCommissions() {
   );
 
   return (
-    <section ref={sectionRef} className="bg-marble py-24 sm:py-32">
-      <Container>
+    <section ref={sectionRef} className="relative bg-marble py-24 sm:py-32">
+      {/* the hero's ink lingers behind the work — a faint echo that settles
+          back into clean marble by the time the grid ends */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[110vh] overflow-hidden"
+      >
+        <Image
+          src={asset("/content/video/ink-light-poster.webp")}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-top opacity-[0.16]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-marble/30 via-marble/65 to-marble" />
+      </div>
+
+      <Container className="relative z-10">
         <SectionHeading
           eyebrow="Selected Work"
           title={
@@ -88,7 +106,7 @@ export function FeaturedCommissions() {
           lead="Each piece is painted to order, one of one. Here are some that left the studio lately."
         />
 
-        <div className="mt-14 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:mt-20 lg:grid-cols-12">
+        <div className="mt-14 grid grid-cols-3 gap-x-2 gap-y-6 sm:gap-x-6 sm:gap-y-10 lg:mt-20 lg:grid-cols-12">
           {items.map((item, i) => (
             <Link
               key={item.id}
@@ -99,17 +117,17 @@ export function FeaturedCommissions() {
               <PieceFrame
                 item={item}
                 priority={i === 0}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
+                sizes="(max-width: 1024px) 33vw, 40vw"
               />
-              <div className="flex items-baseline justify-between gap-4 pt-4">
-                <h3 className="font-display text-xl font-medium text-ink">
+              <div className="flex items-baseline justify-between gap-4 pt-2 sm:pt-4">
+                <h3 className="font-display text-sm font-medium text-ink sm:text-xl">
                   {item.title}
                 </h3>
-                <span className="shrink-0 text-sm text-stone">
+                <span className="hidden shrink-0 text-sm text-stone sm:inline">
                   {item.base} · {item.year}
                 </span>
               </div>
-              <div className="pt-2">
+              <div className="hidden pt-2 sm:block">
                 <Badge>{item.type}</Badge>
               </div>
             </Link>

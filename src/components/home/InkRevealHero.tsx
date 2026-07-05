@@ -37,9 +37,11 @@ export function InkRevealHero() {
     offset: ["start start", "end end"],
   });
 
-  // copy drifts up and fades while the ink evolves behind it
+  // copy drifts up and fades while the ink evolves behind it — the fade
+  // finishes only at the very end of the pin, so the headline hands off to
+  // the next section without a dead stretch of empty ink.
   const copyY = useTransform(scrollYProgress, [0, 1], [0, -120]);
-  const copyOpacity = useTransform(scrollYProgress, [0, 0.55, 0.92], [1, 1, 0]);
+  const copyOpacity = useTransform(scrollYProgress, [0, 0.72, 0.99], [1, 1, 0]);
 
   // reduced motion: a normal-height hero with the static poster.
   if (reduce) {
