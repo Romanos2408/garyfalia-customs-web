@@ -1,0 +1,333 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   Garyfalia Customs — design tokens
+   Mood: editorial, gallery-grade, "wearable art". Marble white + deep navy.
+   To re-theme the whole site to NAVY GREEN, change only --navy and --navy-deep
+   below to the commented green values. Everything derives from these.
+   ========================================================================== */
+
+:root {
+  /* Surfaces */
+  --marble: #f5f3ee; /* page background — warm marble white */
+  --paper: #fbfaf7; /* cards / raised surfaces */
+  --mist: #e7e3d9; /* hairline borders, dividers */
+  --stone: #6f6a5d; /* muted text / captions on light surfaces — darkened to meet WCAG AA (4.5:1) on marble */
+
+  /* Ink & brand */
+  --ink: #0e1b2a; /* primary text — deep navy-black */
+  --navy: #16263f; /* PRIMARY brand color (navy blue) */
+  --navy-deep: #0c1a2e; /* darker navy for footers / contrast blocks */
+
+  /* Alternative theme — swap --navy and --navy-deep to these for "navy green":
+  --navy:      #15302a;
+  --navy-deep: #0c201b;
+  */
+
+  /* Optional tasteful accent — a warm brass that reads as "craft".
+     Off by default; used almost never. */
+  --accent: #b08a4f;
+
+  /* Derived */
+  --page-bg: var(--marble);
+
+  --header-h: 76px;
+}
+
+/* Expose tokens to Tailwind v4 as utilities (bg-marble, text-navy, border-mist…).
+   `inline` keeps utilities pointing at the raw vars above, so the one-line
+   navy→green swap re-themes every class instantly. */
+@theme inline {
+  --color-marble: var(--marble);
+  --color-paper: var(--paper);
+  --color-mist: var(--mist);
+  --color-stone: var(--stone);
+  --color-ink: var(--ink);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-accent: var(--accent);
+
+  /* v1 commission palette — salmon/coral + cream, ported from garyfalia-customs-web-v1.
+     Used ONLY on the /commission page so it can mirror the original order form. */
+  --color-background: #fefdfb;
+  --color-foreground: #1a1a1a;
+  --color-primary: #f4845f;
+  --color-primary-dark: #e8734e;
+  --color-primary-light: #ffb5a0;
+  --color-dark: #0f0f0f;
+  --color-dark-light: #1a1a1a;
+  --color-cream: #fff5f2;
+  --color-gray: #6b6b6b;
+  --color-gray-light: #e5e5e5;
+  --color-success: #4caf50;
+  --color-error: #e53935;
+
+  --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman",
+    serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+
+  /* Fluid display scale */
+  --text-hero: clamp(2.85rem, 8.5vw, 7.25rem);
+  --text-display: clamp(2.1rem, 5vw, 4rem);
+  --text-title: clamp(1.45rem, 3vw, 2.35rem);
+  --text-eyebrow: 0.78rem;
+
+  --radius-card: 14px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------------------------ base
+   NOTE: these live in @layer base so Tailwind's utilities (text-*, font-*, …)
+   reliably override them. Unlayered element rules would otherwise beat every
+   utility — e.g. `a { color: inherit }` would defeat `text-marble` on links. */
+
+@layer base {
+
+html {
+  background: var(--page-bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--page-bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--navy);
+  color: var(--marble);
+}
+
+/* Headings default to the display face */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+/* Visible, on-brand focus ring everywhere */
+:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Lenis: while smooth-scrolling is active, html gets .lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+} /* end @layer base */
+
+/* ----------------------------------------------------------- utilities */
+
+@layer utilities {
+  /* readable prose measure for editorial paragraphs */
+  .measure {
+    max-width: 64ch;
+  }
+  .measure-narrow {
+    max-width: 52ch;
+  }
+
+  /* a soft, gallery-grade card shadow (very subtle) */
+  .shadow-soft {
+    box-shadow:
+      0 1px 2px rgba(14, 27, 42, 0.04),
+      0 12px 28px -16px rgba(14, 27, 42, 0.18);
+  }
+  .shadow-lift {
+    box-shadow:
+      0 2px 4px rgba(14, 27, 42, 0.05),
+      0 26px 50px -24px rgba(14, 27, 42, 0.28);
+  }
+
+  /* faint marble veining texture for dark bands */
+  .marble-veins {
+    background-image:
+      radial-gradient(
+        60% 50% at 20% 10%,
+        rgba(245, 243, 238, 0.06),
+        transparent 60%
+      ),
+      radial-gradient(
+        50% 40% at 85% 30%,
+        rgba(245, 243, 238, 0.05),
+        transparent 60%
+      );
+  }
+
+  /* used by SplitText line reveals — each line sits in a clip mask */
+  .split-mask {
+    overflow: hidden;
+    padding-bottom: 0.05em;
+  }
+}
+
+/* ----------------------------------------------------------- keyframes */
+
+@keyframes cue {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(2.5rem);
+    opacity: 0;
+  }
+}
+
+/* /lab hero variations — CSS entrance (safe: resting state is visible) + idle float */
+@keyframes labEnter {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes labFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@layer utilities {
+  .lab-enter {
+    animation: labEnter 0.9s var(--ease-out) both;
+  }
+  .lab-float {
+    animation: labFloat var(--float-dur, 6s) ease-in-out infinite;
+  }
+}
+
+
+/* --------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- refined hero entrances (CSS = always settles visible) ---- */
+@keyframes curtainDown {
+  from {
+    clip-path: inset(0 0 100% 0 round 14px);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 14px);
+  }
+}
+@keyframes curtainUp {
+  from {
+    clip-path: inset(100% 0 0 0 round 14px);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 14px);
+  }
+}
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes lineWipe {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes unfold {
+  from {
+    clip-path: inset(50% 0 50% 0 round 14px);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 14px);
+  }
+}
+@keyframes lookbookCycle {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  6%,
+  28% {
+    opacity: 1;
+  }
+  34% {
+    opacity: 0;
+  }
+}
+@layer utilities {
+  .unfold {
+    animation: unfold 1.15s var(--ease-out) 0.1s both;
+  }
+  .lookbook-img {
+    animation: lookbookCycle 10.5s ease-in-out infinite;
+  }
+}
+/* lookbook stays on one piece if motion is reduced */
+@media (prefers-reduced-motion: reduce) {
+  .lookbook-img {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+  .lookbook-img:first-child {
+    opacity: 1 !important;
+  }
+}
+@layer utilities {
+  .curtain-down {
+    animation: curtainDown 1.15s var(--ease-out) 0.1s both;
+  }
+  .curtain-up {
+    animation: curtainUp 1s var(--ease-out) 0.5s both;
+  }
+  .rise-in {
+    animation: riseIn 0.85s var(--ease-out) both;
+  }
+}
