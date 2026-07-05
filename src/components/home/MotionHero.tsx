@@ -181,7 +181,7 @@ function ArtFrame({ reduce }: { reduce: boolean }) {
 
 /* --------------------------------------------------------------- copy */
 
-function HeroCopy({ reduce }: { reduce: boolean }) {
+export function HeroCopy({ reduce }: { reduce: boolean }) {
   return (
     <Container className="relative z-10 grid h-svh grid-cols-1 items-center gap-12 pb-24 pt-[calc(var(--header-h)+3rem)] lg:grid-cols-12 lg:gap-8 lg:pt-[var(--header-h)]">
       <motion.div

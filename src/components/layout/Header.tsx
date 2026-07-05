@@ -24,9 +24,9 @@ export function Header() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
-  // every page now opens on light ground (the home hero is calm marble until
-  // the ink droplet lands) — dark chrome is retired.
-  const onDark = false;
+  // the home hero opens on deep navy (ink-reveal) — light chrome while the
+  // header sits over it, until the solid marble bar fades in on scroll.
+  const onDark = pathname === "/" && !scrolled;
 
   return (
     <header
