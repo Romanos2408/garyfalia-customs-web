@@ -1,10 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import {
   motion,
   useScroll,
-  useSpring,
   useTransform,
   useMotionTemplate,
   useReducedMotion,
@@ -17,12 +16,11 @@ import { asset } from "@/lib/asset";
 
 /**
  * Home hero — navy ink on pale water (the site-wide ink identity), EARNED
- * instead of pre-exposed. The page opens on clean marble; a navy droplet
- * falls and, on impact, the footage is revealed through a circular mask that
- * pops open at the landing point, then EXPANDS with scroll until the plume
- * owns the screen (~60% through the pin). The footage keeps scrubbing
- * forward the whole way (HeroBackdrop maps scroll → currentTime), so the ink
- * both spreads and evolves. Reduced motion: static poster, no theatre.
+ * instead of pre-exposed. The page opens on near-clean marble with a small
+ * seed of ink; scrolling expands the circular reveal until the plume owns
+ * the screen (~60% through the pin) while the footage scrubs forward
+ * (HeroBackdrop maps scroll → currentTime), so the ink both spreads and
+ * evolves. Reduced motion: static poster, no mask.
  */
 
 /** Navy-ink-on-light footage: Pexels #7565969 ("Colored Ink in the Water",
@@ -34,13 +32,10 @@ const FOOTAGE = {
 
 /** Mask origin — where the droplet lands (fractions of the viewport). */
 const IMPACT = { x: 0.62, y: 0.4 };
-/** Droplet fall timing (s). */
-const DROP = { delay: 0.9, duration: 0.8 };
 
 export function InkRevealHero() {
   const reduce = useReducedMotion() ?? false;
   const heroRef = useRef<HTMLElement>(null);
-  const [dropDone, setDropDone] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -51,22 +46,12 @@ export function InkRevealHero() {
   const copyY = useTransform(scrollYProgress, [0, 1], [0, -120]);
   const copyOpacity = useTransform(scrollYProgress, [0, 0.55, 0.92], [1, 1, 0]);
 
-  // reveal radius = impact pop (spring, fires once) + scroll expansion.
-  // 9% pop on landing; full-screen (~160% radius) by 60% of the pin.
-  const impactR = useSpring(0, { stiffness: 130, damping: 15 });
-  const scrollR = useTransform(scrollYProgress, [0.02, 0.6], [0, 155], {
+  // reveal radius: pure scroll — a small seed of ink is visible at rest, and
+  // scrolling expands it to full-screen (~160% radius) by 60% of the pin.
+  const radius = useTransform(scrollYProgress, [0, 0.6], [6, 160], {
     clamp: true,
   });
-  const radius = useTransform<number, number>(
-    [impactR, scrollR] as const,
-    ([a, b]: number[]) => Math.max(0, (a ?? 0) + (b ?? 0)),
-  );
   const clipPath = useMotionTemplate`circle(${radius}% at ${IMPACT.x * 100}% ${IMPACT.y * 100}%)`;
-
-  const onImpact = () => {
-    setDropDone(true);
-    impactR.set(9);
-  };
 
   // reduced motion: a normal-height hero with the static poster, no mask.
   if (reduce) {
@@ -107,28 +92,6 @@ export function InkRevealHero() {
         <motion.div style={{ clipPath }} className="absolute inset-0 will-change-[clip-path]">
           <HeroBackdrop progress={scrollYProgress} src={FOOTAGE.src} poster={FOOTAGE.poster} tone="light" />
         </motion.div>
-
-        {/* the droplet — a navy bead falling to the impact point */}
-        {!dropDone ? (
-          <motion.span
-            aria-hidden
-            initial={{ top: "-4%", scaleY: 1, opacity: 0 }}
-            animate={{
-              top: `${IMPACT.y * 100}%`,
-              scaleY: [1, 1.25, 0.55],
-              opacity: [0, 1, 1],
-            }}
-            transition={{
-              delay: DROP.delay,
-              duration: DROP.duration,
-              ease: [0.5, 0, 0.9, 0.4], // accelerating, gravity-like
-              times: [0, 0.75, 1],
-            }}
-            onAnimationComplete={onImpact}
-            className="absolute z-[5] block h-4 w-3 rounded-full bg-navy shadow-[0_0_18px_rgba(22,38,63,0.35)]"
-            style={{ left: `${IMPACT.x * 100}%`, translateX: "-50%" }}
-          />
-        ) : null}
 
         <motion.div style={{ y: copyY, opacity: copyOpacity }} className="relative z-10 h-svh">
           <Container className="grid h-svh grid-cols-1 items-center pb-24 pt-[calc(var(--header-h)+3rem)] lg:grid-cols-12 lg:pt-[var(--header-h)]">
