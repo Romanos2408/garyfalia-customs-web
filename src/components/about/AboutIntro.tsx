@@ -6,6 +6,7 @@ import { gsap, SplitText, useGSAP } from "@/lib/gsap";
 import { EASE, prefersReducedMotion } from "@/lib/motion";
 import { Container, Eyebrow } from "@/components/ui";
 import { asset } from "@/lib/asset";
+import { AboutInkBackdrop } from "./AboutInkBackdrop";
 
 export function AboutIntro() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -70,9 +71,10 @@ export function AboutIntro() {
   return (
     <section
       ref={sectionRef}
-      className="pt-[calc(var(--header-h)+3rem)]"
+      className="relative pt-[calc(var(--header-h)+3rem)]"
     >
-      <Container className="grid grid-cols-1 items-center gap-12 pb-20 lg:grid-cols-12 lg:gap-16">
+      <AboutInkBackdrop />
+      <Container className="relative z-10 grid grid-cols-1 items-center gap-12 pb-20 lg:grid-cols-12 lg:gap-16">
         {/* portrait */}
         <div className="order-2 lg:order-1 lg:col-span-6">
           <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[var(--radius-card)] border border-mist bg-paper shadow-lift lg:max-w-none">
