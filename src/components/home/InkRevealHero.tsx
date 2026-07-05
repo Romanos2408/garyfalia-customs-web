@@ -37,15 +37,11 @@ export function InkRevealHero() {
     offset: ["start start", "end end"],
   });
 
-  // copy dips while the ink show plays mid-pin, then returns to full opacity
-  // before the unpin — the headline leaves the screen as solid text scrolling
-  // away with the section, never as a fade-to-nothing.
-  const copyY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const copyOpacity = useTransform(
-    scrollYProgress,
-    [0.15, 0.35, 0.7, 0.95],
-    [1, 0.12, 0.12, 1],
-  );
+  // copy fades out once, gradually, finishing right at the unpin — so the
+  // headline dissolves smoothly INTO the arrival of the next section, with
+  // no dead ink-only stretch and no reappearing.
+  const copyY = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const copyOpacity = useTransform(scrollYProgress, [0.4, 0.98], [1, 0]);
 
   // reduced motion: a normal-height hero with the static poster.
   if (reduce) {
