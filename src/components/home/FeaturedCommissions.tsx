@@ -10,14 +10,16 @@ import { PieceFrame } from "@/components/gallery/PieceFrame";
 import { featuredGallery } from "@/data/gallery";
 import { asset } from "@/lib/asset";
 
-// a curated, deliberately uneven set
-const items = featuredGallery.slice(0, 5);
+// a curated, deliberately uneven set — 6 pieces so the mobile 3-up grid
+// makes two clean rows
+const items = featuredGallery.slice(0, 6);
 const layout = [
   "lg:col-span-7",
   "lg:col-span-5 lg:mt-20",
-  "lg:col-span-4",
-  "lg:col-span-4 lg:mt-12",
-  "lg:col-span-4 lg:mt-4",
+  "lg:col-span-5 lg:mt-6",
+  "lg:col-span-7 lg:mt-14",
+  "lg:col-span-6",
+  "lg:col-span-6 lg:mt-10",
 ];
 
 export function FeaturedCommissions() {
@@ -97,6 +99,7 @@ export function FeaturedCommissions() {
 
       <Container className="relative z-10">
         <SectionHeading
+          align="center"
           eyebrow="Selected Work"
           title={
             <>
