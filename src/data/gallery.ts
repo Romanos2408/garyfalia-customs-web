@@ -1,3 +1,4 @@
+import { asset } from "@/lib/asset";
 /**
  * The portfolio. Each entry renders a gallery card + lightbox with zero other
  * code changes.
@@ -46,7 +47,7 @@ export const gallery: GalleryItem[] = [
       "Itachi and the red-cloud crew, hand-painted across the panels — a quiet, deliberate tribute for a die-hard Naruto fan.",
     materials: "Leather AF1, Angelus leather paints, matte sealant",
     year: 2024,
-    image: "/content/gallery/photo-08-nobg.webp",
+    image: asset("/content/gallery/photo-08-nobg.webp"),
     alt: "White Nike Air Force 1 sneakers hand-painted with Naruto Akatsuki characters and red clouds",
     featured: true,
   },
@@ -60,7 +61,7 @@ export const gallery: GalleryItem[] = [
       "A celestial guardian painted across the back panel in cool blues and silver — stars dusted into the denim by hand.",
     materials: "Denim jacket, acrylics, heat-set + sealed",
     year: 2024,
-    image: "/content/gallery/photo-09-nobg.webp",
+    image: asset("/content/gallery/photo-09-nobg.webp"),
     alt: "Blue denim jacket with a celestial anime guardian painted across the back in blues and silver",
     featured: true,
   },
@@ -74,7 +75,7 @@ export const gallery: GalleryItem[] = [
       "Two panels, two eras of Freddie — a line-art portrait on one shoe, a full-colour stage moment on the other.",
     materials: "Leather AF1, Angelus leather paints, matte sealant",
     year: 2023,
-    image: "/content/gallery/photo-02-nobg.webp",
+    image: asset("/content/gallery/photo-02-nobg.webp"),
     alt: "Pair of white Air Force 1 sneakers hand-painted with portraits of Freddie Mercury",
     featured: true,
   },
@@ -88,7 +89,7 @@ export const gallery: GalleryItem[] = [
       "The Attack Titan rising out of smoke on washed black denim — high contrast, lots of texture, built to be worn loud.",
     materials: "Black denim jacket, acrylics, heat-set + sealed",
     year: 2025,
-    image: "/content/gallery/photo-13-nobg.webp",
+    image: asset("/content/gallery/photo-13-nobg.webp"),
     alt: "Black denim jacket painted with the Attack on Titan titan emerging from smoke",
     featured: true,
   },
@@ -102,7 +103,7 @@ export const gallery: GalleryItem[] = [
       "Soft cherry-blossom wash with Nezuko across both sides — a gentler palette that still reads from across the room.",
     materials: "Leather sneaker, Angelus leather paints, matte sealant",
     year: 2024,
-    image: "/content/gallery/photo-06-nobg.webp",
+    image: asset("/content/gallery/photo-06-nobg.webp"),
     alt: "White Nike sneakers hand-painted with the Demon Slayer character Nezuko on a pink blossom background",
     featured: true,
   },
@@ -116,7 +117,7 @@ export const gallery: GalleryItem[] = [
       "The Hashira, reduced to their eyes — five stacked colour blocks across the back, each one its own character study.",
     materials: "Denim jacket, acrylics, heat-set + sealed",
     year: 2025,
-    image: "/content/gallery/photo-01_2-nobg.webp",
+    image: asset("/content/gallery/photo-01_2-nobg.webp"),
     alt: "Blue denim jacket with the eyes of the Demon Slayer Hashira painted in stacked colour blocks",
     featured: true,
   },
@@ -130,7 +131,7 @@ export const gallery: GalleryItem[] = [
       "The Straw Hats in their Wano arc fits — mixed line-art and full colour wrapping around both shoes.",
     materials: "Leather sneaker, Angelus leather paints, matte sealant",
     year: 2024,
-    image: "/content/gallery/photo-07-nobg.webp",
+    image: asset("/content/gallery/photo-07-nobg.webp"),
     alt: "White Nike sneakers painted with One Piece characters Luffy and Zoro in their Wano outfits",
   },
   {
@@ -143,7 +144,7 @@ export const gallery: GalleryItem[] = [
       "Uchiha brothers against a deep red moon — heavy blacks, one accent colour, nothing wasted.",
     materials: "Leather AF1, Angelus leather paints, matte sealant",
     year: 2025,
-    image: "/content/gallery/photo-12-nobg.webp",
+    image: asset("/content/gallery/photo-12-nobg.webp"),
     alt: "White Air Force 1 sneakers painted with Naruto Uchiha characters against a red moon",
   },
   {
@@ -156,7 +157,7 @@ export const gallery: GalleryItem[] = [
       "Ace, Luffy and Sabo together — a warm, story-first piece for someone who grew up on the manga.",
     materials: "Leather sneaker, Angelus leather paints, matte sealant",
     year: 2023,
-    image: "/content/gallery/photo-11-nobg.webp",
+    image: asset("/content/gallery/photo-11-nobg.webp"),
     alt: "White adidas sneakers painted with the One Piece brothers Ace, Luffy and Sabo",
   },
   {
@@ -169,7 +170,7 @@ export const gallery: GalleryItem[] = [
       "Goku, the turtle kanji and a scatter of dragon balls — clean black line-work on white, with orange pops.",
     materials: "Leather sneaker, Angelus leather paints, matte sealant",
     year: 2023,
-    image: "/content/gallery/photo-03-nobg.webp",
+    image: asset("/content/gallery/photo-03-nobg.webp"),
     alt: "White low-top sneakers painted with Dragon Ball Goku, the turtle kanji and dragon balls",
   },
   {
@@ -182,7 +183,7 @@ export const gallery: GalleryItem[] = [
       "The companion to the Starlight jacket — the same celestial character, reworked to wrap a pair of sneakers.",
     materials: "Leather sneaker, Angelus leather paints, matte sealant",
     year: 2024,
-    image: "/content/gallery/photo-10-nobg.webp",
+    image: asset("/content/gallery/photo-10-nobg.webp"),
     alt: "White Nike sneakers painted with a celestial anime character in blues and lilac",
   },
   {
@@ -195,7 +196,7 @@ export const gallery: GalleryItem[] = [
       "Zoro on a torn 'WANTED' poster motif — sandy, washed tones for a more vintage feel.",
     materials: "Leather sneaker, Angelus leather paints, matte sealant",
     year: 2025,
-    image: "/content/gallery/photo-14-nobg.webp",
+    image: asset("/content/gallery/photo-14-nobg.webp"),
     alt: "White Nike sneakers painted with One Piece Zoro on a torn wanted poster",
   },
   {
@@ -208,7 +209,7 @@ export const gallery: GalleryItem[] = [
       "Tom and Jerry mid-chase across a cheese-and-blue backdrop — a playful all-over print, fun front to back.",
     materials: "Leather AF1, Angelus leather paints, matte sealant",
     year: 2023,
-    image: "/content/gallery/photo-15-nobg.webp",
+    image: asset("/content/gallery/photo-15-nobg.webp"),
     alt: "White Air Force 1 sneakers painted all over with Tom and Jerry on a blue and cheese background",
   },
   {
@@ -221,7 +222,7 @@ export const gallery: GalleryItem[] = [
       "A Moana set sized for little feet — Maui, Pua and Heihei tucked around the toe and heel.",
     materials: "Kids' sneakers, Angelus leather paints, matte sealant",
     year: 2024,
-    image: "/content/gallery/photo-05-nobg.webp",
+    image: asset("/content/gallery/photo-05-nobg.webp"),
     alt: "Children's white sneakers painted with Moana characters Maui, Pua and Heihei",
   },
 ];

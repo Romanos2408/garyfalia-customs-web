@@ -7,6 +7,7 @@ import { EASE, prefersReducedMotion } from "@/lib/motion";
 import { Container, Button, Eyebrow } from "@/components/ui";
 import { site } from "@/data/site";
 import { getGalleryItem } from "@/data/gallery";
+import { asset } from "@/lib/asset";
 
 const accent = getGalleryItem("dawn"); // Naruto AF1
 
@@ -147,7 +148,7 @@ export function Hero() {
                 className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_-10%,rgba(255,255,255,0.7),transparent_55%)]"
               />
               <Image
-                src="/content/gallery/photo-01_1-nobg.webp"
+                src={asset("/content/gallery/photo-01_1-nobg.webp")}
                 alt="A model wearing the hand-painted Demon Slayer Hashira denim jacket, eyes of the Hashira across the back"
                 fill
                 priority

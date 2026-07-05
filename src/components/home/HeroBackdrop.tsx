@@ -8,6 +8,7 @@ import {
   useMotionValueEvent,
   type MotionValue,
 } from "framer-motion";
+import { asset } from "@/lib/asset";
 
 /**
  * Full-bleed ANIMATED hero background — navy ink in water (Pexels, free
@@ -47,7 +48,7 @@ export function HeroBackdrop({ progress }: { progress: MotionValue<number> }) {
     <div aria-hidden className="absolute inset-0 z-0 overflow-hidden bg-navy-deep">
       {reduce ? (
         <Image
-          src="/content/video/ink-navy-poster.webp"
+          src={asset("/content/video/ink-navy-poster.webp")}
           alt=""
           fill
           priority
@@ -62,9 +63,9 @@ export function HeroBackdrop({ progress }: { progress: MotionValue<number> }) {
           muted
           playsInline
           preload="auto"
-          poster="/content/video/ink-navy-poster.webp"
+          poster={asset("/content/video/ink-navy-poster.webp")}
         >
-          <source src="/content/video/ink-navy.mp4" type="video/mp4" />
+          <source src={asset("/content/video/ink-navy.mp4")} type="video/mp4" />
         </video>
       )}
 

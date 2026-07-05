@@ -14,6 +14,7 @@ import {
 import { Container } from "@/components/ui";
 import { getGalleryItem } from "@/data/gallery";
 import { HeroBackdrop } from "./HeroBackdrop";
+import { asset } from "@/lib/asset";
 
 /**
  * Home hero — full-bleed ink video that SCRUBS with scroll (the hero pins for a
@@ -23,7 +24,7 @@ import { HeroBackdrop } from "./HeroBackdrop";
  */
 
 const WORN = {
-  src: "/content/gallery/photo-01_1-nobg.webp",
+  src: asset("/content/gallery/photo-01_1-nobg.webp"),
   alt: "A model wearing the hand-painted Demon Slayer Hashira denim jacket",
 };
 const accent = getGalleryItem("dawn"); // Naruto AF1

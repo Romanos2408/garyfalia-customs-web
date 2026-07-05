@@ -10,6 +10,7 @@ import {
 import { Container } from "@/components/ui";
 import { createInkSim, type InkSim } from "@/lib/inksim/createInkSim";
 import { Copy } from "@/components/lab/BloomHero";
+import { asset } from "@/lib/asset";
 
 /**
  * Home hero — the ink is EARNED, not pre-exposed. The page opens as calm
@@ -148,7 +149,7 @@ export function DropletHero() {
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src="/content/video/ink-bloom-poster.webp"
+            src={asset("/content/video/ink-bloom-poster.webp")}
             alt=""
             aria-hidden
             className="absolute inset-0 h-full w-full -scale-x-100 object-cover"

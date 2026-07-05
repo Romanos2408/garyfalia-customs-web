@@ -14,6 +14,7 @@ import {
   type Variants,
 } from "framer-motion";
 import { Container } from "@/components/ui";
+import { asset } from "@/lib/asset";
 
 /**
  * /lab/bloom — "Bloom-in" concept. A navy ink drop blooms into CLEAR water as
@@ -153,7 +154,7 @@ function BloomBackdrop({
       {reduce ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src="/content/video/ink-bloom-poster.webp"
+          src={asset("/content/video/ink-bloom-poster.webp")}
           alt=""
           className="absolute inset-0 h-full w-full -scale-x-100 object-cover"
         />
@@ -165,9 +166,9 @@ function BloomBackdrop({
           muted
           playsInline
           preload="auto"
-          poster="/content/video/ink-bloom-poster.webp"
+          poster={asset("/content/video/ink-bloom-poster.webp")}
         >
-          <source src="/content/video/ink-bloom.mp4" type="video/mp4" />
+          <source src={asset("/content/video/ink-bloom.mp4")} type="video/mp4" />
         </video>
       )}
 

@@ -1,5 +1,8 @@
 import { ImageResponse } from "next/og";
 
+// static export (GitHub Pages preview) requires this to be explicit
+export const dynamic = "force-static";
+
 export const alt =
   "Garyfalia Customs — hand-painted custom sneakers & denim jackets";
 export const size = { width: 1200, height: 630 };

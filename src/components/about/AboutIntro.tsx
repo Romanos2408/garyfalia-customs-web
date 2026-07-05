@@ -5,6 +5,7 @@ import Image from "next/image";
 import { gsap, SplitText, useGSAP } from "@/lib/gsap";
 import { EASE, prefersReducedMotion } from "@/lib/motion";
 import { Container, Eyebrow } from "@/components/ui";
+import { asset } from "@/lib/asset";
 
 export function AboutIntro() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -82,7 +83,7 @@ export function AboutIntro() {
             {/* TODO: replace with a real portrait of the artist (or hands at work). */}
             <div data-portrait className="absolute inset-[-6%]">
               <Image
-                src="/content/gallery/photo-01_1-nobg.webp"
+                src={asset("/content/gallery/photo-01_1-nobg.webp")}
                 alt="Garyfalia wearing one of her hand-painted denim jackets"
                 fill
                 priority

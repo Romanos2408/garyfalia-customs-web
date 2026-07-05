@@ -8,9 +8,10 @@ import { cn } from "@/lib/cn";
 import { Container, Button, Eyebrow } from "@/components/ui";
 import { getGalleryItem } from "@/data/gallery";
 import type { LabVariantId } from "@/data/lab";
+import { asset } from "@/lib/asset";
 
 const WORN = {
-  src: "/content/gallery/photo-01_1-nobg.webp",
+  src: asset("/content/gallery/photo-01_1-nobg.webp"),
   alt: "A model wearing the hand-painted Demon Slayer Hashira denim jacket",
 };
 

@@ -10,6 +10,7 @@ import {
 import { Container } from "@/components/ui";
 import { createInkSim, type InkSim } from "@/lib/inksim/createInkSim";
 import { Copy } from "./BloomHero";
+import { asset } from "@/lib/asset";
 
 /**
  * /lab/inksim — a LIVE GPU ink-in-water fluid simulation (ported from
@@ -117,7 +118,7 @@ export function InkSimHero() {
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src="/content/video/ink-bloom-poster.webp"
+            src={asset("/content/video/ink-bloom-poster.webp")}
             alt=""
             aria-hidden
             className="absolute inset-0 h-full w-full -scale-x-100 object-cover"
