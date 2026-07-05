@@ -99,7 +99,6 @@ export function FeaturedCommissions() {
 
       <Container className="relative z-10">
         <SectionHeading
-          align="center"
           eyebrow="Selected Work"
           title={
             <>
@@ -122,15 +121,15 @@ export function FeaturedCommissions() {
                 priority={i === 0}
                 sizes="(max-width: 1024px) 33vw, 40vw"
               />
-              <div className="flex items-baseline justify-between gap-4 pt-2 sm:pt-4">
+              <div className="pt-2 text-center sm:pt-4">
                 <h3 className="font-display text-sm font-medium text-ink sm:text-xl">
                   {item.title}
                 </h3>
-                <span className="hidden shrink-0 text-sm text-stone sm:inline">
+                <span className="hidden text-sm text-stone sm:mt-1 sm:block">
                   {item.base} · {item.year}
                 </span>
               </div>
-              <div className="hidden pt-2 sm:block">
+              <div className="hidden pt-2 text-center sm:block">
                 <Badge>{item.type}</Badge>
               </div>
             </Link>
