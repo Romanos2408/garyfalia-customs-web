@@ -5,7 +5,6 @@ import {
   motion,
   useScroll,
   useTransform,
-  useMotionTemplate,
   useReducedMotion,
 } from "framer-motion";
 import Image from "next/image";
@@ -15,12 +14,11 @@ import { Copy } from "@/components/lab/BloomHero";
 import { asset } from "@/lib/asset";
 
 /**
- * Home hero — navy ink on pale water (the site-wide ink identity), EARNED
- * instead of pre-exposed. The page opens on near-clean marble with a small
- * seed of ink; scrolling expands the circular reveal until the plume owns
- * the screen (~60% through the pin) while the footage scrubs forward
- * (HeroBackdrop maps scroll → currentTime), so the ink both spreads and
- * evolves. Reduced motion: static poster, no mask.
+ * Home hero — navy ink on pale water (the site-wide ink identity), full-bleed
+ * and SCRUBBED by scroll: the hero pins for a stretch and the plume evolves
+ * forward as you scroll down, rewinds as you scroll up (HeroBackdrop maps
+ * scroll → currentTime). Copy drifts up and fades over the pin.
+ * Reduced motion: static poster, no pin.
  */
 
 /** Navy-ink-on-light footage: Pexels #7565969 ("Colored Ink in the Water",
@@ -29,9 +27,6 @@ const FOOTAGE = {
   src: "/content/video/ink-light.mp4",
   poster: "/content/video/ink-light-poster.webp",
 };
-
-/** Mask origin — where the droplet lands (fractions of the viewport). */
-const IMPACT = { x: 0.62, y: 0.4 };
 
 export function InkRevealHero() {
   const reduce = useReducedMotion() ?? false;
@@ -46,14 +41,7 @@ export function InkRevealHero() {
   const copyY = useTransform(scrollYProgress, [0, 1], [0, -120]);
   const copyOpacity = useTransform(scrollYProgress, [0, 0.55, 0.92], [1, 1, 0]);
 
-  // reveal radius: pure scroll — a small seed of ink is visible at rest, and
-  // scrolling expands it to full-screen (~160% radius) by 60% of the pin.
-  const radius = useTransform(scrollYProgress, [0, 0.6], [6, 160], {
-    clamp: true,
-  });
-  const clipPath = useMotionTemplate`circle(${radius}% at ${IMPACT.x * 100}% ${IMPACT.y * 100}%)`;
-
-  // reduced motion: a normal-height hero with the static poster, no mask.
+  // reduced motion: a normal-height hero with the static poster.
   if (reduce) {
     return (
       <section ref={heroRef} className="relative min-h-svh overflow-hidden bg-marble">
@@ -88,10 +76,8 @@ export function InkRevealHero() {
           <rect width="100%" height="100%" filter="url(#reveal-grain)" />
         </svg>
 
-        {/* the ink footage, unveiled through the expanding circle */}
-        <motion.div style={{ clipPath }} className="absolute inset-0 will-change-[clip-path]">
-          <HeroBackdrop progress={scrollYProgress} src={FOOTAGE.src} poster={FOOTAGE.poster} tone="light" />
-        </motion.div>
+        {/* the ink footage, scrubbed forward by scroll */}
+        <HeroBackdrop progress={scrollYProgress} src={FOOTAGE.src} poster={FOOTAGE.poster} tone="light" />
 
         <motion.div style={{ y: copyY, opacity: copyOpacity }} className="relative z-10 h-svh">
           <Container className="grid h-svh grid-cols-1 items-center pb-24 pt-[calc(var(--header-h)+3rem)] lg:grid-cols-12 lg:pt-[var(--header-h)]">
