@@ -40,12 +40,12 @@ export function FeaturedCommissions() {
       cards.forEach((card) => {
         gsap.from(card, {
           autoAlpha: 0,
-          y: 44,
-          duration: 0.9,
+          y: 24,
+          duration: 1.1,
           ease: EASE.out,
           scrollTrigger: {
             trigger: card,
-            start: "top 88%",
+            start: "top 92%",
             once: true,
           },
         });
@@ -81,20 +81,19 @@ export function FeaturedCommissions() {
 
   return (
     <section ref={sectionRef} className="relative bg-marble py-24 sm:py-32">
-      {/* the hero's ink lingers behind the work — a faint echo that settles
-          back into clean marble by the time the grid ends */}
+      {/* the hero's ink continues behind the work — clearly visible where the
+          hero hands off, settling into clean marble by the time the grid ends */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[110vh] overflow-hidden"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[120vh] overflow-hidden"
       >
         <Image
           src={asset("/content/video/ink-light-poster.webp")}
           alt=""
           fill
           sizes="100vw"
-          className="object-cover object-top opacity-[0.16]"
+          className="object-cover object-top opacity-[0.5] [mask-image:linear-gradient(to_bottom,black_0%,rgba(0,0,0,0.35)_35%,transparent_70%)]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-marble/30 via-marble/65 to-marble" />
       </div>
 
       <Container className="relative z-10">
