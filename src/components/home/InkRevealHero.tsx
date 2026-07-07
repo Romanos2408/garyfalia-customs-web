@@ -1,12 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-} from "framer-motion";
+import { useScroll, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Container } from "@/components/ui";
 import { HeroBackdrop } from "./HeroBackdrop";
@@ -37,17 +32,10 @@ export function InkRevealHero() {
     offset: ["start start", "end end"],
   });
 
-  // NO opacity scrubbing on the copy (fades read as disappear/reappear on
-  // touch). Instead the copy PARALLAXES: it translates upward at just under
-  // finger speed through the pin, giving continuous scroll feedback while
-  // the ink stays pinned beneath — and it exits the top physically (~85% of
-  // the pin), handing off into the Selected Work ink seam.
-  const copyY = useTransform(
-    scrollYProgress,
-    [0.05, 0.85],
-    ["0vh", "-105vh"],
-    { clamp: true },
-  );
+  // NO opacity scrubbing on the copy — every scroll-linked fade reads as
+  // "disappears/reappears" on touch (partial-opacity ghost states, reversible
+  // by micro-scrolls). The headline stays solid through the pin and exits
+  // physically with the unpin, straight into the Selected Work ink seam.
 
   // reduced motion: a normal-height hero with the static poster.
   if (reduce) {
@@ -71,7 +59,7 @@ export function InkRevealHero() {
   }
 
   return (
-    <section ref={heroRef} className="relative h-[200vh]">
+    <section ref={heroRef} className="relative h-[230vh]">
       <div className="sticky top-0 h-svh overflow-hidden bg-marble">
         {/* calm base — marble + paper grain, before any ink exists */}
         <svg
@@ -87,11 +75,11 @@ export function InkRevealHero() {
         {/* the ink footage, scrubbed forward by scroll */}
         <HeroBackdrop progress={scrollYProgress} src={FOOTAGE.src} poster={FOOTAGE.poster} tone="light" />
 
-        <motion.div style={{ y: copyY }} className="relative z-10 h-svh will-change-transform">
+        <div className="relative z-10 h-svh">
           <Container className="grid h-svh grid-cols-1 items-center pb-24 pt-[calc(var(--header-h)+3rem)] lg:grid-cols-12 lg:pt-[var(--header-h)]">
             <Copy reduce={false} />
           </Container>
-        </motion.div>
+        </div>
 
         {/* scroll cue */}
         <div className="pointer-events-none absolute inset-x-0 bottom-7 z-10 flex flex-col items-center gap-2 text-stone">

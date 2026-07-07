@@ -34,9 +34,7 @@ export function HeroBackdrop({
 }) {
   const reduce = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
-  // stiffer spring = the scrub tracks the finger closely instead of lagging
-  // and catching up (the rubbery feel), while still rounding off seek steps.
-  const smooth = useSpring(progress, { stiffness: 160, damping: 30, mass: 0.25 });
+  const smooth = useSpring(progress, { stiffness: 90, damping: 26, mass: 0.35 });
 
   // map smoothed scroll progress → currentTime (skip micro-updates to avoid thrash)
   useMotionValueEvent(smooth, "change", (v) => {
